@@ -1,3 +1,6 @@
+$white: white;
+$skyBlue: #61dafb;
+
 .App {
   text-align: center;
 }
@@ -21,11 +24,11 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: $white;
 }
 
 .App-link {
-  color: #61dafb;
+  color: $skyBlue;
 }
 
 @keyframes App-logo-spin {
@@ -35,4 +38,12 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.App-map-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
 }
