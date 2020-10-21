@@ -1,5 +1,5 @@
 import React from "react";
-import { Map } from "components";
+import { Map, Navigation } from "components";
 
 import AppManager from "./AppManager";
 import { GlobalContext } from "./context";
@@ -13,6 +13,7 @@ const App = () => {
     <GlobalContext.Provider value={{ data, actions }}>
       <article className="app">
         <Map />
+        <Navigation />
       </article>
     </GlobalContext.Provider>
   );
