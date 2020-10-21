@@ -1,0 +1,4 @@
+export const MAP_CONSTANTS = {
+  ZOOM_LEVEL: 13.5,
+  CENTER: [-6.1296182, 53.24705],
+};
