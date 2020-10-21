@@ -1,12 +1,11 @@
 import React from "react";
-
+import { Logo } from "..";
 import "./styles.scss";
 
 const Navigation = () => {
   return (
     <div className="navigation">
-      THIS IS NAVIGATION
-      <i className="icon-picture" />
+      <Logo />
     </div>
   );
 };
