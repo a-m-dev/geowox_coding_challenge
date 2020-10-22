@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "containers/App";
-import "./index.scss";
-import "./font-icon.scss";
+
+import "./globalStyles/global.scss";
 
 ReactDOM.render(
   <React.StrictMode>
