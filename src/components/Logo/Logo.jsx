@@ -7,8 +7,6 @@ const Logo = () => {
   return (
     <section className="logo-wrapper">
       <img src={GEOWOX_LOGO} alt="logo" className="logo-wrapper__img" />
-      <span></span>
-      <h3>Coding Challenge</h3>
     </section>
   );
 };

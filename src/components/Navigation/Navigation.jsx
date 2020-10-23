@@ -1,5 +1,6 @@
 import React from "react";
 import { Logo } from "..";
+
 import "./styles.scss";
 
 const Navigation = () => {

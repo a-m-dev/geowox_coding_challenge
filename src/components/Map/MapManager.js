@@ -1,32 +1,42 @@
-import { useRef, useEffect } from "react";
-import MapboxGL from "mapbox-gl";
+import { useState, useEffect, useCallback } from "react";
 import { useGlobalContext } from "containers/App/context";
 
 const MapManager = () => {
-  const MapRef = useRef(null);
+  const [mapViewport, setMapViewport] = useState({});
+
   const {
-    data: { mapCenter, mapZoomLevel },
+    REACT_APP_MAPBOX_GL_STYLE,
+    REACT_APP_MAPBOX_GL_ACCESS_TOKEN,
+  } = process.env;
+
+  const {
+    data: { isLoading, properties, mapCenter, mapZoomLevel },
   } = useGlobalContext();
 
   useEffect(() => {
-    const {
-      REACT_APP_MAPBOX_GL_STYLE,
-      REACT_APP_MAPBOX_GL_ACCESS_TOKEN,
-    } = process.env;
-
-    MapboxGL.accessToken = REACT_APP_MAPBOX_GL_ACCESS_TOKEN;
-    new MapboxGL.Map({
-      container: MapRef.current,
-      style: REACT_APP_MAPBOX_GL_STYLE,
-      center: mapCenter,
+    setMapViewport({
+      width: "100vw",
+      height: "100vh",
+      latitude: mapCenter[1],
+      longitude: mapCenter[0],
       zoom: mapZoomLevel,
     });
-  }, [MapRef, mapCenter, mapZoomLevel]);
+  }, [mapCenter, mapZoomLevel, setMapViewport]);
+
+  const handleVieportChange = useCallback(
+    (nextViewportConfig) => {
+      setMapViewport(nextViewportConfig);
+    },
+    [setMapViewport]
+  );
 
   return {
-    refs: { MapRef },
-    data: {},
-    actions: {},
+    data: { isLoading, properties, mapViewport },
+    env: {
+      MAPBOX_GL_STYLE: REACT_APP_MAPBOX_GL_STYLE,
+      MAPBOX_GL_ACCESS_TOKEN: REACT_APP_MAPBOX_GL_ACCESS_TOKEN,
+    },
+    actions: { handleVieportChange },
   };
 };
 
