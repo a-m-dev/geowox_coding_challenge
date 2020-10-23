@@ -1,24 +1,37 @@
 import React from "react";
-import ReactMapGL from "react-map-gl";
+import ReactMapboxGL from "react-mapbox-gl";
+import Marker from "../Marker";
 
 import "./styles.scss";
 import MapManager from "./MapManager";
 
+const MapInstance = ReactMapboxGL({
+  accessToken: process.env.REACT_APP_MAPBOX_GL_ACCESS_TOKEN,
+});
+
 const Map = () => {
   const {
-    data: { mapViewport },
-    env: { MAPBOX_GL_STYLE, MAPBOX_GL_ACCESS_TOKEN },
-    actions: { handleVieportChange },
+    data: { mapCenter, mapZoomLevel, propertyMarkersLocation },
+    actions: { handleActiveMarker },
   } = MapManager();
 
   return (
     <article className="map">
-      <ReactMapGL
-        {...mapViewport}
-        mapStyle={MAPBOX_GL_STYLE}
-        onViewportChange={handleVieportChange}
-        mapboxApiAccessToken={MAPBOX_GL_ACCESS_TOKEN}
-      />
+      <MapInstance
+        center={mapCenter}
+        zoom={mapZoomLevel}
+        className="map__container"
+        style={process.env.REACT_APP_MAPBOX_GL_STYLE}
+      >
+        {!!propertyMarkersLocation &&
+          propertyMarkersLocation.map((marker, i) => (
+            <Marker
+              key={i}
+              markerLocation={marker}
+              handleActiveMarker={handleActiveMarker}
+            />
+          ))}
+      </MapInstance>
     </article>
   );
 };

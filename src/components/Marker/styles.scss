@@ -1,0 +1,10 @@
+.marker-container {
+  position: relative;
+
+  &__icon {
+    position: absolute;
+    left: -25px;
+    top: -33px;
+    font-size: 2rem;
+  }
+}
