@@ -1,0 +1,45 @@
+/**
+  These are just some handy mixins
+*/
+
+// Make Flex
+@mixin makeFlex($justify, $align, $direction: row) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+  flex-direction: $direction;
+}
+
+// Fit viewport
+@mixin makeFitViewport {
+  width: 100vw;
+  height: 100vh;
+}
+
+// make unselectable
+@mixin makeUnselectable() {
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+}
+
+// make Background Blur
+@mixin makeBgBlur {
+  background-color: rgba($white, 0.65);
+  backdrop-filter: blur(10px) brightness(1);
+  -webkit-backdrop-filter: blur(10px) brightness(1);
+}
+
+// make casual card
+@mixin makeCasualCard($height: 52px) {
+  height: $height;
+  padding: 0.5rem 1rem;
+  border-radius: 0.35rem;
+  box-shadow: 0 0.5rem 1.5rem rgba($dark, 0.2);
+}
+
+// make Transition
+@mixin makeTransition($time: 0.3s, $type: ease-in-out) {
+  transition: all $time $type;
+}

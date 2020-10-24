@@ -1,0 +1,25 @@
+@import "../../globalStyles/variables";
+@import "../../globalStyles/mixins";
+
+.filter {
+  position: relative;
+  margin-left: 1rem;
+
+  @include makeCasualCard();
+  @include makeBgBlur();
+  @include makeFlex(flex-start, center);
+  padding: 1rem 0.8rem;
+
+  &__icon {
+    font-size: 1.3rem;
+    color: $median-gray;
+    position: relative;
+    top: -2px;
+    cursor: pointer;
+    @include makeTransition(0.15s);
+
+    &:hover {
+      color: $sky-blue;
+    }
+  }
+}

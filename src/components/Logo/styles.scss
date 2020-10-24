@@ -1,7 +1,27 @@
+@import "../../globalStyles/variables";
+@import "../../globalStyles/mixins";
+
 .logo-wrapper {
+  width: fit-content;
   position: relative;
+  @include makeCasualCard();
+  @include makeBgBlur();
+  @include makeFlex(flex-start, center);
 
   &__img {
     width: 128px;
+  }
+
+  &__divider {
+    width: 2px;
+    height: 30px;
+    background-color: $light-gray;
+    margin: 0 0.625rem;
+  }
+
+  &__heading {
+    margin: 0;
+    color: $median-gray;
+    font-size: 1rem;
   }
 }

@@ -1,10 +1,19 @@
+@import "../../globalStyles/variables";
+
 .marker-container {
   position: relative;
 
   &__icon {
     position: absolute;
-    left: -25px;
+    left: -10px;
     top: -33px;
     font-size: 2rem;
+    color: $sky-blue;
+
+    &::before {
+      width: 20px !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
   }
 }

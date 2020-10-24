@@ -12,7 +12,7 @@ const MapInstance = ReactMapboxGL({
 const Map = () => {
   const {
     data: { mapCenter, mapZoomLevel, propertyMarkersLocation },
-    actions: { handleActiveMarker },
+    actions: { handleActiveMarker, handleMapZoom },
   } = MapManager();
 
   return (
@@ -22,6 +22,7 @@ const Map = () => {
         zoom={mapZoomLevel}
         className="map__container"
         style={process.env.REACT_APP_MAPBOX_GL_STYLE}
+        onZoom={handleMapZoom}
       >
         {!!propertyMarkersLocation &&
           propertyMarkersLocation.map((marker, i) => (

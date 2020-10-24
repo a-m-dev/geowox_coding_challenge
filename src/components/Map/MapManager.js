@@ -11,10 +11,20 @@ const MapManager = () => {
     return properties.map(({ lat, lon }) => [lon, lat]);
   }, [properties]);
 
-  const handleActiveMarker = useCallback((args) => {
-    setMapCenter(args);
-    setMapZoomLevel([16]);
-  }, []);
+  const handleActiveMarker = useCallback(
+    (args) => {
+      setMapCenter(args);
+      setMapZoomLevel([18]);
+    },
+    [setMapCenter, setMapZoomLevel]
+  );
+
+  const handleMapZoom = useCallback(
+    (arg) => {
+      // console.log("sss", arg);
+    },
+    [mapZoomLevel]
+  );
 
   return {
     data: {
@@ -25,7 +35,7 @@ const MapManager = () => {
       mapZoomLevel,
       propertyMarkersLocation,
     },
-    actions: { handleActiveMarker },
+    actions: { handleActiveMarker, handleMapZoom },
   };
 };
 

@@ -1,13 +1,17 @@
 import React from "react";
-import { Logo } from "..";
+import Logo from "../Logo";
+import Filter from "../Filter";
+import PieChart from "../PieChart";
 
 import "./styles.scss";
 
 const Navigation = () => {
   return (
-    <div className="navigation">
+    <section className="navigation">
       <Logo />
-    </div>
+      <Filter />
+      <PieChart />
+    </section>
   );
 };
 
