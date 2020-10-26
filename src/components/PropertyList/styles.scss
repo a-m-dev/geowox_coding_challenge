@@ -8,6 +8,7 @@
   z-index: 10;
   width: 100%;
   bottom: 2rem;
+  padding: 0 1rem;
 
   &__heading {
     position: absolute;
@@ -18,20 +19,13 @@
   & .swiper-container {
     height: 250px;
     overflow: visible;
+    transform: translateX(-1rem);
   }
 
   &__item {
     height: 250px;
-    margin: 0 1rem;
-    max-width: 380px;
+    min-width: 380px;
+    padding: 0 1rem;
     @include makeFlex(center, flex-end);
-
-    &:first-child {
-      margin-left: 0;
-    }
-
-    &:last-child {
-      margin-right: 0;
-    }
   }
 }

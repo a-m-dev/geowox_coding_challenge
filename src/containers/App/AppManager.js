@@ -103,6 +103,18 @@ const AppManager = () => {
     [setIsLoading, setSearchResult, setShouldShowFilterError]
   );
 
+  const handleItemMouseEnter = useCallback(({ lat, lon }) => {
+    console.log("ENTER");
+    setMapCenter([lon, lat]);
+    setMapZoomLevel([18]);
+  }, []);
+
+  const handleItemMouseLeave = useCallback(() => {
+    console.log("LEAVE");
+    setMapCenter(MAP_CONSTANTS.CENTER);
+    setMapZoomLevel([MAP_CONSTANTS.ZOOM_LEVEL]);
+  }, []);
+
   return {
     data: {
       isLoading,
@@ -122,6 +134,9 @@ const AppManager = () => {
 
       handleUpdateFilters,
       handleClearFilters,
+
+      handleItemMouseEnter,
+      handleItemMouseLeave,
     },
   };
 };

@@ -9,6 +9,7 @@
     top: -33px;
     font-size: 2rem;
     color: $sky-blue;
+    pointer-events: none;
 
     &::before {
       width: 20px !important;

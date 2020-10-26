@@ -13,7 +13,7 @@ const PropertyList = () => {
 
   const params = {
     slidesPerView: 3,
-    spaceBetween: 30,
+    // spaceBetween: 30,
   };
 
   return (

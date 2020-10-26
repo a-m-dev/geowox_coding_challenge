@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import { PROPERTY_TYPES } from "constants/PropertyTypes";
 import { PropertyImagesMap } from "constants/PropertyImagesMap";
+import { useGlobalContext } from "containers/App/context";
 
 import "./styles.scss";
 
@@ -16,6 +17,10 @@ const PropertyItem = ({
   propertyType,
   satelliteImage,
 }) => {
+  const {
+    actions: { handleItemMouseEnter, handleItemMouseLeave },
+  } = useGlobalContext();
+
   const iterableDescriptions = useMemo(() => {
     return [
       { id: 1, icon: "icon-layers", value: PROPERTY_TYPES[propertyType] },
@@ -26,7 +31,11 @@ const PropertyItem = ({
   }, [sqm, beds, baths, propertyType]);
 
   return (
-    <section className="property-item">
+    <section
+      className="property-item"
+      onMouseEnter={() => handleItemMouseEnter({ lat, lon })}
+      onMouseLeave={handleItemMouseLeave}
+    >
       <a href={satelliteImage} target="_blank">
         <div className="property-item__cover">
           <img src={PropertyImagesMap.get(id)} alt="sqm" />
@@ -45,7 +54,7 @@ const PropertyItem = ({
         </div>
 
         <div className="property-item__price">
-          <span>$ {Number(price).toLocaleString()}</span>
+          <span>$ {price ? Number(price).toLocaleString() : "-"}</span>
         </div>
       </a>
     </section>
