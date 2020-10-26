@@ -1,0 +1,44 @@
+@import "../../globalStyles/variables";
+@import "../../globalStyles/mixins";
+
+.drop-down-item {
+  height: 40px;
+  margin: 0.3rem;
+  font-size: 0.85rem;
+  padding: 0.5rem;
+  background-color: $white;
+  border: 1px solid transparent;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  @include makeFlex(space-between, center);
+  @include makeTransition(0.3s, ease-in-out);
+
+  &:hover {
+    border: 1px solid rgba($light-gray, 0.3);
+
+    & i {
+      opacity: 1;
+    }
+  }
+
+  & i {
+    opacity: 0;
+    color: rgba($light-gray, 0.3);
+    @include makeTransition(0.3s, ease-in-out);
+  }
+
+  &--selected {
+    color: $bright-green;
+    background-color: rgba($bright-green, 0.1);
+    border: 1px solid rgba(darken($bright-green, 5), 0.6);
+
+    &:hover {
+      border: 1px solid rgba(darken($bright-green, 5), 0.6);
+    }
+
+    & i {
+      opacity: 1;
+      color: rgba($bright-green, 1);
+    }
+  }
+}

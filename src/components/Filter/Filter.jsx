@@ -6,8 +6,7 @@ import "./styles.scss";
 
 const Filter = () => {
   const {
-    data: {},
-    actions: {},
+    data: { getFilterableData },
   } = FilterManager();
 
   return (
@@ -15,9 +14,15 @@ const Filter = () => {
       <i className="icon-equalizer filter__icon-setting" />
 
       <div className="filter__drop-down-container">
-        <DropDown />
-        <DropDown />
-        <DropDown />
+        {Object.entries(getFilterableData).map(
+          ([filtersetLabel, filterable]) => (
+            <DropDown
+              key={filtersetLabel}
+              label={filtersetLabel}
+              dataset={filterable}
+            />
+          )
+        )}
       </div>
     </section>
   );
