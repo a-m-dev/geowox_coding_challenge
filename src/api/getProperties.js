@@ -6,8 +6,10 @@ const getProperties = () => {
     try {
       const time = randomNumGenerator({ min: 1, max: 3, boundary: 1000 });
 
+      let result = [...propertyData];
+
       setTimeout(() => {
-        res(propertyData);
+        res(result);
       }, time);
     } catch (e) {
       rej({ code: 400, message: "Bad Request", error: e });

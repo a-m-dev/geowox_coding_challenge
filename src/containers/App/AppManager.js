@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
-import { getProperties } from "api";
+import { getProperties, findProperties } from "api";
 import { MAP_CONSTANTS } from "constants/MapConstants";
 import { getUniqArr } from "utils/getUniqArr";
 import { findById } from "utils/findById";
@@ -7,10 +7,12 @@ import { findById } from "utils/findById";
 const AppManager = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [properties, setProperties] = useState([]);
+  const [searchResult, setSearchResult] = useState([]);
   const [mapCenter, setMapCenter] = useState(MAP_CONSTANTS.CENTER);
   const [mapZoomLevel, setMapZoomLevel] = useState(MAP_CONSTANTS.ZOOM_LEVEL);
+  const [shouldShowFilterError, setShouldShowFilterError] = useState(false);
 
-  const [activeFilters, setActiveFilter] = useState({
+  const [activeFilters, setActiveFilters] = useState({
     propertyTypes: null,
     bathrooms: null,
     bedrooms: null,
@@ -21,15 +23,27 @@ const AppManager = () => {
   }, []);
 
   useEffect(() => {
-    getFilterQuery({ activeFilters, getFilterableData });
+    if (Object.values(activeFilters).some((x) => Boolean(x))) {
+      searchProperties({ activeFilters, getFilterableData });
+    }
   }, [activeFilters]);
 
   const handleUpdateFilters = useCallback(
     ({ filterCategory, id }) => {
-      setActiveFilter((state) => ({ ...state, [filterCategory]: id }));
+      setActiveFilters((state) => ({ ...state, [filterCategory]: id }));
     },
-    [activeFilters, setActiveFilter]
+    [activeFilters, setActiveFilters]
   );
+
+  const handleClearFilters = useCallback(() => {
+    setSearchResult([]);
+    setShouldShowFilterError(false);
+    setActiveFilters({
+      propertyTypes: null,
+      bathrooms: null,
+      bedrooms: null,
+    });
+  }, []);
 
   /** get properties and set to state */
   const getPropertiesData = useCallback(async () => {
@@ -52,24 +66,42 @@ const AppManager = () => {
     return { propertyTypes, bedrooms, bathrooms };
   }, [properties]);
 
-  const getFilterQuery = useCallback(({ activeFilters, getFilterableData }) => {
-    const { propertyTypes, bathrooms, bedrooms } = activeFilters;
+  /** search properties and set to state */
+  const searchProperties = useCallback(
+    async ({ activeFilters, getFilterableData }) => {
+      setIsLoading(true);
 
-    const pt = findById({
-      dataset: getFilterableData.propertyTypes,
-      targetId: propertyTypes,
-    });
-    const bd = findById({
-      dataset: getFilterableData.bedrooms,
-      targetId: bedrooms,
-    });
-    const bth = findById({
-      dataset: getFilterableData.bathrooms,
-      targetId: bathrooms,
-    });
+      const { propertyTypes, bathrooms, bedrooms } = activeFilters;
 
-    getPropertiesData({ pt, bd, bth });
-  }, []);
+      const pt = findById({
+        dataset: getFilterableData.propertyTypes,
+        targetId: propertyTypes,
+      });
+      const bd = findById({
+        dataset: getFilterableData.bedrooms,
+        targetId: bedrooms,
+      });
+      const bth = findById({
+        dataset: getFilterableData.bathrooms,
+        targetId: bathrooms,
+      });
+
+      try {
+        const data = await findProperties({ pt, bd, bth });
+        console.log(">>>>> RESULT", data);
+        setShouldShowFilterError(false);
+        setSearchResult(data);
+      } catch (error) {
+        const { message, code } = error;
+        console.log("Error", error);
+        setShouldShowFilterError(message);
+        setSearchResult([]);
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [setIsLoading, setSearchResult, setShouldShowFilterError]
+  );
 
   return {
     data: {
@@ -81,12 +113,15 @@ const AppManager = () => {
       getFilterableData,
 
       activeFilters,
+      searchResult,
+      shouldShowFilterError,
     },
     actions: {
       setMapCenter,
       setMapZoomLevel,
 
       handleUpdateFilters,
+      handleClearFilters,
     },
   };
 };

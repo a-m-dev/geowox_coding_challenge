@@ -13,10 +13,17 @@
   &:hover {
     height: 75px;
 
-    & .filter__icon-setting {
+    & .filter__icon-setting,
+    & .filter__icon-cancel {
       left: 10px;
       font-size: 1.6rem;
       color: $median-gray;
+    }
+
+    & .filter__icon-cancel {
+      right: 0.25rem;
+      left: unset;
+      top: 2px;
     }
 
     & .drop-down {
@@ -44,7 +51,8 @@
     }
   }
 
-  &__icon-setting {
+  &__icon-setting,
+  &__icon-cancel {
     position: relative;
     cursor: pointer;
     top: -1px;
@@ -54,11 +62,63 @@
     @include makeTransition(0.3s, ease-out);
   }
 
+  &__icon-cancel {
+    left: unset;
+    right: 0.25rem;
+    color: $light-gray !important;
+
+    &:hover {
+      color: $bright-red !important;
+    }
+  }
+
   &__drop-down-container {
     width: 100%;
     height: 100%;
     margin-left: 0.75rem;
     padding: 0 2rem;
     @include makeFlex(space-between, flex-end);
+  }
+
+  &__error-note {
+    position: absolute;
+    z-index: 10;
+    bottom: -4rem;
+    right: 1.9rem;
+    opacity: 0;
+    max-width: 250px;
+    font-size: 0.75rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    background-color: $bright-red;
+    border-top-right-radius: 0;
+    color: darken($bright-red, 20);
+    transform: translateY(100%);
+    pointer-events: none;
+    box-shadow: 0 1rem 2rem rgba($bright-red, 0.2);
+    @include makeTransition(0.3s, ease-in-out);
+
+    & em {
+      display: block;
+      width: 100%;
+    }
+
+    & > span:last-child {
+      width: 0;
+      height: 0;
+      right: 0;
+      top: -10px;
+      position: absolute;
+      border-left: 10px solid transparent;
+      border-right: 0px solid transparent;
+      border-bottom: 10px solid $bright-red;
+    }
+  }
+
+  &--errored {
+    & .filter__error-note {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }

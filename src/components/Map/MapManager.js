@@ -3,13 +3,15 @@ import { useGlobalContext } from "containers/App/context";
 
 const MapManager = () => {
   const {
-    data: { isLoading, properties, mapCenter, mapZoomLevel },
+    data: { isLoading, properties, searchResult, mapCenter, mapZoomLevel },
     actions: { setMapCenter, setMapZoomLevel },
   } = useGlobalContext();
 
   const propertyMarkersLocation = useMemo(() => {
+    if (searchResult.length)
+      return searchResult.map(({ lat, lon }) => [lon, lat]);
     return properties.map(({ lat, lon }) => [lon, lat]);
-  }, [properties]);
+  }, [properties, searchResult]);
 
   const handleActiveMarker = useCallback(
     (args) => {
