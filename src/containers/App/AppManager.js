@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback, useMemo } from "react";
 import { getProperties } from "api";
 import { MAP_CONSTANTS } from "constants/MapConstants";
 import { getUniqArr } from "utils/getUniqArr";
+import { findById } from "utils/findById";
 
 const AppManager = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -10,7 +11,7 @@ const AppManager = () => {
   const [mapZoomLevel, setMapZoomLevel] = useState(MAP_CONSTANTS.ZOOM_LEVEL);
 
   const [activeFilters, setActiveFilter] = useState({
-    propertyType: null,
+    propertyTypes: null,
     bathrooms: null,
     bedrooms: null,
   });
@@ -19,9 +20,13 @@ const AppManager = () => {
     getPropertiesData();
   }, []);
 
+  useEffect(() => {
+    getFilterQuery({ activeFilters, getFilterableData });
+  }, [activeFilters]);
+
   const handleUpdateFilters = useCallback(
-    (args) => {
-      console.log(">>>>", args);
+    ({ filterCategory, id }) => {
+      setActiveFilter((state) => ({ ...state, [filterCategory]: id }));
     },
     [activeFilters, setActiveFilter]
   );
@@ -44,8 +49,27 @@ const AppManager = () => {
     const bathrooms = getUniqArr({ dataset: properties, key: "baths" });
     const bedrooms = getUniqArr({ dataset: properties, key: "beds" });
 
-    return { propertyTypes, bathrooms, bedrooms };
+    return { propertyTypes, bedrooms, bathrooms };
   }, [properties]);
+
+  const getFilterQuery = useCallback(({ activeFilters, getFilterableData }) => {
+    const { propertyTypes, bathrooms, bedrooms } = activeFilters;
+
+    const pt = findById({
+      dataset: getFilterableData.propertyTypes,
+      targetId: propertyTypes,
+    });
+    const bd = findById({
+      dataset: getFilterableData.bedrooms,
+      targetId: bedrooms,
+    });
+    const bth = findById({
+      dataset: getFilterableData.bathrooms,
+      targetId: bathrooms,
+    });
+
+    getPropertiesData({ pt, bd, bth });
+  }, []);
 
   return {
     data: {

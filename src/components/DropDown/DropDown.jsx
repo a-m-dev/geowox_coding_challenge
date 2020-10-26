@@ -19,11 +19,12 @@ const DropDown = ({ label, dataset }) => {
         <i className="icon-down-open-mini" />
       </div>
       <section className="drop-down__list">
-        {dataset.map(({ id, data }) => (
+        {dataset.map(({ id, data, labelPerfix }) => (
           <DropDownItem
             key={id}
             id={id}
             label={data}
+            labelPerfix={labelPerfix}
             isSelected={selectedItem === id}
             itemSelectHandler={handleSetSelectedItem}
           />

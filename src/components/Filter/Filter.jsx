@@ -1,12 +1,14 @@
 import React from "react";
 
+import Loading from "../Loading";
 import DropDown from "../DropDown";
 import FilterManager from "./FilterManager";
+
 import "./styles.scss";
 
 const Filter = () => {
   const {
-    data: { getFilterableData },
+    data: { isLoading, getFilterableData },
   } = FilterManager();
 
   return (
@@ -24,6 +26,8 @@ const Filter = () => {
           )
         )}
       </div>
+
+      <Loading shouldVisible={isLoading} />
     </section>
   );
 };

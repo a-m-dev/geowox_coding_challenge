@@ -13,13 +13,17 @@ const DropDownManager = ({ filterCategory, dataset }) => {
   const handleSetSelectedItem = useCallback(
     (id) => {
       setSelectedItem(id);
-      handleUpdateFilters({ filterCategory, id });
+      handleUpdateFilters({
+        id,
+        filterCategory,
+      });
     },
     [filterCategory, selectedItem, setSelectedItem]
   );
 
   const getLabelById = useMemo(() => {
     const target = dataset.find((x) => x.id === selectedItem) || "";
+
     return typeof target?.data === "string"
       ? PROPERTY_TYPES[target.data]
       : target.data;

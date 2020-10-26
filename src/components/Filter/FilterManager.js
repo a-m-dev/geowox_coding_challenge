@@ -1,14 +1,12 @@
-import { useState, useCallback } from "react";
-
 import { useGlobalContext } from "containers/App/context";
 
 const FilterManager = () => {
   const {
-    data: { getFilterableData },
+    data: { isLoading, getFilterableData },
   } = useGlobalContext();
 
   return {
-    data: { getFilterableData },
+    data: { isLoading, getFilterableData },
   };
 };
 
