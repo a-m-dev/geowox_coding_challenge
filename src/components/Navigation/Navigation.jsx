@@ -7,11 +7,13 @@ import "./styles.scss";
 
 const Navigation = () => {
   return (
-    <section className="navigation">
-      <Logo />
-      <Filter />
-      <PieChart />
-    </section>
+    <article className="container">
+      <section className="navigation">
+        <Logo />
+        <Filter />
+        <PieChart />
+      </section>
+    </article>
   );
 };
 

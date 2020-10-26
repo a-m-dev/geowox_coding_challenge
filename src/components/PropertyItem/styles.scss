@@ -1,0 +1,112 @@
+@import "../../globalStyles/mixins";
+@import "../../globalStyles/variables";
+
+.property-item {
+  width: 100%;
+  height: 250px;
+  border-radius: 0.75rem;
+  position: relative;
+  display: block;
+  background-color: $white;
+  overflow: hidden;
+  box-sizing: border-box;
+  cursor: pointer;
+  box-shadow: 0 1rem 2rem rgba($dark, 0.3);
+  @include makeTransition(0.3s, ease-in-out);
+
+  &:hover {
+    box-shadow: 0 2rem 3rem rgba($dark, 0.4);
+
+    & .property-item__cover i,
+    .property-item__cover p {
+      color: $white;
+    }
+
+    & .property-item__des i,
+    .property-item__des span {
+      color: lighten($median-gray, 10);
+    }
+
+    & .property-item__price {
+      box-shadow: 0 0.5rem 1rem rgba($primary-color, 0.1);
+    }
+  }
+
+  &__cover {
+    position: absolute;
+    width: 100%;
+    height: 70%;
+    overflow-y: hidden;
+    box-shadow: 0 1rem 1rem rgba($dark, 0.15);
+    @include makeFlex(center, center);
+
+    &-address {
+      position: absolute;
+      height: 80px;
+      bottom: 0;
+      padding: 0 1rem;
+      background: $dark;
+      color: lighten($color: $light-gray, $amount: 10);
+      background: linear-gradient(0deg, $dark 0%, transparent 100%);
+      @include makeFlex(flex-start, center);
+
+      & i {
+        font-size: 1.5rem;
+        margin-right: 1rem;
+        @include makeTransition(0.3s, ease-in-out);
+      }
+
+      & p {
+        margin: 0;
+        font-size: 0.85rem;
+        text-transform: lowercase;
+        @include makeTransition(0.3s, ease-in-out);
+      }
+    }
+  }
+
+  &__des {
+    width: 100%;
+    height: 30%;
+    position: absolute;
+    bottom: 0;
+    padding: 0.2rem 1rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    &-item {
+      position: relative;
+      @include makeFlex(center, center, column);
+
+      & i {
+        font-size: 1.1rem;
+        color: $light-gray;
+        @include makeTransition(0.3s, ease-in-out);
+      }
+
+      & span {
+        font-size: 0.8rem;
+        text-align: center;
+        color: $light-gray;
+        @include makeTransition(0.3s, ease-in-out);
+      }
+    }
+  }
+
+  &__price {
+    right: 1rem;
+    font-size: 0.8rem;
+    position: absolute;
+    border-radius: 1rem;
+    color: $primary-light;
+    bottom: calc(30% - 13px);
+    padding: 0.25rem 0.75rem;
+    background-color: $primary-color;
+    @include makeTransition(0.3s, ease-in-out);
+
+    & span {
+      position: relative;
+      top: -2px;
+    }
+  }
+}

@@ -1,10 +1,11 @@
 import React from "react";
-import { Map, Navigation } from "components";
+import { Map, Navigation, PropertyList } from "components";
 
 import AppManager from "./AppManager";
 import { GlobalContext } from "./context";
 
 import "./styles.scss";
+import "swiper/swiper.scss";
 
 const App = () => {
   const { data, actions } = AppManager();
@@ -14,6 +15,7 @@ const App = () => {
       <article className="app">
         <Map />
         <Navigation />
+        <PropertyList />
       </article>
     </GlobalContext.Provider>
   );

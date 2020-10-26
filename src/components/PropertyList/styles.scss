@@ -1,0 +1,37 @@
+@import "../../globalStyles/variables";
+@import "../../globalStyles/mixins";
+
+.property-list {
+  position: fixed;
+  max-width: 1200px;
+  min-height: 150px;
+  z-index: 10;
+  width: 100%;
+  bottom: 2rem;
+
+  &__heading {
+    position: absolute;
+    top: -2rem;
+    margin: 0;
+  }
+
+  & .swiper-container {
+    height: 250px;
+    overflow: visible;
+  }
+
+  &__item {
+    height: 250px;
+    margin: 0 1rem;
+    max-width: 380px;
+    @include makeFlex(center, flex-end);
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
