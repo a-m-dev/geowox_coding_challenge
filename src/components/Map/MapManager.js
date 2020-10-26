@@ -21,13 +21,6 @@ const MapManager = () => {
     [setMapCenter, setMapZoomLevel]
   );
 
-  const handleMapZoom = useCallback(
-    (arg) => {
-      // console.log("sss", arg);
-    },
-    [mapZoomLevel]
-  );
-
   return {
     data: {
       isLoading,
@@ -37,7 +30,7 @@ const MapManager = () => {
       mapZoomLevel,
       propertyMarkersLocation,
     },
-    actions: { handleActiveMarker, handleMapZoom },
+    actions: { handleActiveMarker },
   };
 };
 
