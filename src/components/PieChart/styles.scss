@@ -6,21 +6,81 @@
   width: fit-content;
   justify-self: flex-end;
 
-  @include makeCasualCard();
-  @include makeBgBlur();
-  @include makeFlex(flex-start, center);
-  padding: 1rem 0.8rem;
+  @include makeFlex(center, flex-start);
+  padding: 0;
 
   &__icon {
     font-size: 1.3rem;
     color: $median-gray;
     position: relative;
-    top: -2px;
     cursor: pointer;
+    @include makeBgBlur();
+    @include makeCasualCard();
     @include makeTransition(0.15s);
 
     &:hover {
       color: $sky-blue;
+
+      + .pie-chart__box {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: all;
+      }
+    }
+  }
+
+  &__box {
+    position: absolute;
+    width: 300px;
+    display: block;
+    right: 0;
+    top: 60px;
+    transform: translateY(100px);
+    opacity: 0;
+    pointer-events: none;
+    @include makeFlex(center, flex-start);
+    @include makeBgBlur();
+    @include makeCasualCard();
+    @include makeTransition(0.3s, ease-in-out);
+    height: 400px;
+    border-radius: 0.75rem;
+    border-top-right-radius: 0;
+
+    & .rechart-wrapper {
+      margin: 0;
+    }
+
+    &-legend {
+      position: absolute;
+      bottom: 2rem;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 1rem;
+      font-size: 0.7rem;
+
+      & span {
+        width: 5px;
+        height: 3px;
+        color: $white;
+        border-radius: 1rem;
+        padding: 0.2rem 0.6rem;
+      }
+
+      &--terraced {
+        background-color: #0088fe;
+      }
+
+      &--detached {
+        background-color: #00c49f;
+      }
+
+      &--semi-detached {
+        background-color: #ffbb28;
+      }
+
+      &--apartment {
+        background-color: #ff8042;
+      }
     }
   }
 }
