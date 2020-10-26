@@ -1,20 +1,146 @@
 @import "../../globalStyles/variables";
+@import "../../globalStyles/mixins";
 
 .marker-container {
-  position: relative;
+  pointer-events: none;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
-  &__icon {
+  & i {
     position: absolute;
-    left: -10px;
-    top: -33px;
-    font-size: 2rem;
-    color: $sky-blue;
+    z-index: 10;
+    top: -10px;
+    left: -4px;
     pointer-events: none;
+    font-size: 1.75rem;
+    color: lighten($sky-blue, 13);
+  }
 
-    &::before {
-      width: 20px !important;
-      margin-left: 0 !important;
-      margin-right: 0 !important;
+  .pin {
+    display: block;
+    width: 35px;
+    height: 35px;
+    outline: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .small-circle {
+      position: absolute;
+      z-index: 1;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 15px;
+      height: 15px;
+      display: block;
+      border-radius: 50px;
+      background-color: lighten($color: $sky-blue, $amount: 22);
     }
+
+    .large-circle {
+      background-color: lighten($color: $sky-blue, $amount: 28);
+    }
+
+    .bubble {
+      background-color: lighten($color: $bright-green, $amount: 20);
+    }
+
+    .large-circle,
+    .bubble {
+      position: absolute;
+      width: 35px;
+      height: 35px;
+      display: block;
+      border-radius: 50px;
+      opacity: 0.3;
+    }
+
+    .bubble {
+      opacity: 0;
+    }
+  }
+
+  .normal {
+    span {
+      background: rgba($sky-blue, 1);
+    }
+
+    span:nth-child(2) {
+      box-shadow: 0 10px 30px rgba($sky-blue, 0.1);
+    }
+  }
+
+  .active {
+    span {
+      background: $sky-blue;
+    }
+
+    span:first-child {
+      animation: pinSmall 3s infinite ease-in-out;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    span:nth-child(2) {
+      animation: pinLarge 3s infinite ease-in-out;
+      transform: scale(1);
+    }
+
+    span:last-child {
+      animation: bubbleLarge 3s infinite ease-in-out;
+      animation-delay: 0.5s;
+      transform: scale(1);
+    }
+  }
+}
+
+@keyframes pinSmall {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.3);
+    opacity: 0.4;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.7;
+  }
+}
+
+@keyframes pinLarge {
+  0% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(0.8);
+    opacity: 0.1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+}
+
+@keyframes bubbleLarge {
+  0% {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+  20% {
+    transform: scale(0.7);
+    opacity: 0.3;
+  }
+  80% {
+    transform: scale(5);
+    opacity: 0.05;
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
   }
 }

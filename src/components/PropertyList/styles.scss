@@ -24,7 +24,7 @@
 
   &__item {
     height: 250px;
-    min-width: 380px;
+    max-width: 380px;
     padding: 0 1rem;
     @include makeFlex(center, flex-end);
   }
