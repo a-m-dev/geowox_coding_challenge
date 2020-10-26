@@ -104,13 +104,11 @@ const AppManager = () => {
   );
 
   const handleItemMouseEnter = useCallback(({ lat, lon }) => {
-    console.log("ENTER");
     setMapCenter([lon, lat]);
     setMapZoomLevel([18]);
   }, []);
 
   const handleItemMouseLeave = useCallback(() => {
-    console.log("LEAVE");
     setMapCenter(MAP_CONSTANTS.CENTER);
     setMapZoomLevel([MAP_CONSTANTS.ZOOM_LEVEL]);
   }, []);
