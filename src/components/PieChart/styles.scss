@@ -2,8 +2,9 @@
 @import "../../globalStyles/mixins";
 
 .pie-chart {
-  position: absolute;
-  right: 1rem;
+  position: relative;
+  width: fit-content;
+  justify-self: flex-end;
 
   @include makeCasualCard();
   @include makeBgBlur();

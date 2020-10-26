@@ -1,0 +1,42 @@
+@import "../../globalStyles/mixins";
+@import "../../globalStyles/variables";
+
+.drop-down {
+  position: relative;
+  width: 200px;
+  min-width: 100px;
+  height: 34px;
+  padding: 0.5rem;
+  padding-left: 0.8rem;
+  border-radius: 0.3rem;
+  background-color: rgba(lighten($light-gray, 15), 0.5);
+  @include makeFlex(flex-start, center, row);
+  @include makeTransition(0.3s, ease-in-out);
+
+  &__selection {
+    width: 100%;
+    position: relative;
+    @include makeFlex(space-between, center);
+
+    &-label {
+      position: absolute;
+      font-size: 0.75rem;
+      top: -0.4rem;
+      opacity: 0;
+      color: $median-gray;
+      @include makeTransition(0.3s, ease-in-out);
+    }
+
+    &-selected {
+      margin: 0;
+      font-size: 0.8rem;
+      color: $light-gray;
+      @include makeTransition(0.3s, ease-in-out);
+    }
+
+    & i {
+      color: $light-gray;
+      font-size: 1.25rem;
+    }
+  }
+}
