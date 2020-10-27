@@ -1,68 +1,52 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Geowox Coding Challenge
 
-## Available Scripts
+This Repo is a simple React Project for Geowox Coding challenge! this project had been containerized with Docker and there is a docker-compose.yml file in the root directory to boot up the client side service!
 
-In the project directory, you can run:
+There is only One Service involved in this project, and it is been called `geowox_client`.
 
-### `yarn start`
+### Thoughts on this project
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+First of all before I began this, i actually created a mind map of what i want to do. this step is really important for me on any thing and the code that i want to write, because it clears my path! you can [see my mind map at here](https://coggle.it/diagram/X4rBjypHpZXUDFit/t/__geowox-test__)!
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### The Project
 
-### `yarn test`
+For client side I used React, and since the project was not way more big, i did not envolved any kind of state managment like **Redux** or Recoil, and i used the pure React context api, which perfectly fits for this kind of small project!
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+I developed my entire project in modular way, in which every component has a clear folder structure for itself and is really simple to undrestand the code!
 
-### `yarn build`
+I used Mapbox for this project, because it it free and easy to use based on my location ( Iran ), because Google Developer console is gives 403 for Iranian developers. before this happened to us i get to used google api console alot on different stuff along side with map api, but unfortunatley as of now, i could not access the google console properly and get API_KEY of it! and since i had some experience with map box in multiple enterprise projects ( not large scale, mid-level projects like 10k active users ) and since it was satisfyed the busseness at the time, I decided to go with Mapbox!
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+also please notice that i included my `.env` file on production, and yes :) I know that it is wrong, but since i wanted to faciliate the setup for you, i reduced the effort of getting Mapbox api key and other stuff for you, I just wanted that to be easy for you to boot up the project :)
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+### How to run project
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+there are two ways to run this project, docker or the casual way:
 
-### `yarn eject`
+#### casual Way
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+1. clone the project
+2. run `npm install`
+3. open the project on port `http://localhost:3000`
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### docker way
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+you need to install `docker` and `docker-compose` for this.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+1. clone the project
+2. run `docker-compose up -d`
 
-## Learn More
+**NOTE**: please note that if you go the docker way, you need to open `http://localhost:3010` ; b/c i mapping it to 3010 in compose file!
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## what I might do in the next steps:
 
-### Code Splitting
+There is a list of things to do as a next step:
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+1. I might make it **responsive**!
+2. I might use **typescript** for static type checking
+3. have to use **snapshot**, **unit** and **integration** test in client side
+4. definitly this is not a bug free application, of course there would be some bugs, and i should resolve.
 
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Hope you Best!  
+Ahmad (@a_m_dev)

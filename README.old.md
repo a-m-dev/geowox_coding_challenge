@@ -1,1 +1,0 @@
-# Geowox Coding challenge!
